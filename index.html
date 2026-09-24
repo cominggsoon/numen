@@ -572,7 +572,7 @@
     /* ── RESPONSIVE ─────────────────────────────────── */
     @media (max-width: 900px) {
       .about__inner    { grid-template-columns: 1fr; }
-      .about__visual   { aspect-ratio: 16/7; max-height: 260px; }
+      .about__visual   { aspect-ratio: 4/5; max-height: 420px; }
       .about__pillars  { grid-template-columns: repeat(3,1fr); }
       .raffle__inner   { grid-template-columns: 1fr; gap: 3.5rem; }
       .footer__inner   { grid-template-columns: 1fr 1fr; }
@@ -715,11 +715,10 @@
         <div class="location__text reveal">
           <span class="section__label">Dónde estamos</span>
           <p class="location__address">
-            Madrid<br>
-            España
+            Calle Narváez 6<br>
+            Valdemoro
           </p>
-          <!-- ▶ PERSONALIZA: cambia la dirección exacta cuando la tengas -->
-          <p class="location__detail">Dirección exacta · Próximamente</p>
+          <p class="location__detail">Madrid · España</p>
         </div>
         <div class="location__opening reveal d2">
           <span class="location__opening-label">Apertura</span>
@@ -766,16 +765,21 @@
             <span class="raffle__form-heading">Inscripción al sorteo VIP</span>
 
             <!--
-              ╔══════════════════════════════════════════════════╗
-              ║  FORMSPREE — instrucciones en 2 pasos:          ║
-              ║  1. Ve a formspree.io y crea una cuenta gratis  ║
-              ║  2. Crea un nuevo form y copia el action URL    ║
-              ║  3. Reemplaza "TU_ID_FORMSPREE" por tu ID       ║
-              ╚══════════════════════════════════════════════════╝
+              ╔══════════════════════════════════════════════════════════════╗
+              ║  ACTIVAR FORMULARIO — 3 pasos (5 minutos):                  ║
+              ║                                                              ║
+              ║  1. Ve a https://formspree.io y crea cuenta gratis          ║
+              ║  2. Clic en "+ New Form" → ponle nombre (ej: "Sorteo VIP")  ║
+              ║  3. Copia el ID (ej: "xpwzabcd") y sustituye               ║
+              ║     TU_ID_FORMSPREE → tu ID en la línea action= de abajo   ║
+              ║                                                              ║
+              ║  Los datos del sorteo llegarán a tu email automáticamente.  ║
+              ║  Plan gratis: 50 envíos/mes.                                 ║
+              ╚══════════════════════════════════════════════════════════════╝
             -->
             <form
               id="raffle-form"
-              action="https://formspree.io/f/TU_ID_FORMSPREE"
+              action="https://formspree.io/f/maenbjvd"
               method="POST"
               novalidate
             >
