@@ -483,6 +483,46 @@
     .form-submit-wrap .btn { width: 100%; text-align: center; }
     .form-legal { font-size: 0.58rem; opacity: 0.25; line-height: 1.6; margin-top: 1rem; text-align: center; }
 
+    /* Select */
+    .fg select {
+      width: 100%; background: transparent;
+      border: none; border-bottom: 1px solid rgba(255,255,255,0.12);
+      color: #fff; font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem; font-weight: 300;
+      padding: 0.7rem 0; outline: none;
+      cursor: pointer;
+      transition: border-color 0.3s var(--ease);
+      -webkit-appearance: none; appearance: none;
+    }
+    .fg select option { background: #1a0a0d; color: #fff; }
+    .fg select:focus { border-bottom-color: var(--wine); }
+    .fg select.err { border-bottom-color: #c0392b; }
+    .fg .select-wrap { position: relative; }
+    .fg .select-wrap::after {
+      content: '↓'; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+      font-size: 0.7rem; opacity: 0.35; pointer-events: none;
+    }
+
+    /* Checkboxes */
+    .fg .checks { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.6rem; }
+    .fg .check-item { display: flex; align-items: center; gap: 0.75rem; cursor: pointer; }
+    .fg .check-item input[type="checkbox"] { display: none; }
+    .fg .check-box {
+      width: 14px; height: 14px; flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.25);
+      position: relative; transition: border-color 0.2s;
+    }
+    .fg .check-item input[type="checkbox"]:checked ~ .check-box {
+      border-color: var(--wine); background: var(--wine);
+    }
+    .fg .check-item input[type="checkbox"]:checked ~ .check-box::after {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4l3 3 5-6' stroke='%23fff' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") center/8px no-repeat;
+    }
+    .fg .check-label { font-size: 0.78rem; font-weight: 300; opacity: 0.7; }
+    .fg .checks.err-group ~ .err-msg { display: none; }
+    .fg .checks.err-group.err ~ .err-msg { display: block; }
+
     /* Éxito */
     .raffle__success { display: none; text-align: center; padding: 3rem 0; }
     .raffle__success.show { display: block; }
@@ -590,7 +630,7 @@
     .footer__logo-fallback { font-family: 'Bebas Neue', 'Arial Narrow', Arial, sans-serif; font-size: 2rem; letter-spacing: 0.12em; margin-bottom: 0.3rem; display: block; }
     .footer__logo-sub { font-size: 0.5rem; letter-spacing: 0.35em; text-transform: uppercase; opacity: 0.3; display: block; margin-bottom: 1.5rem; }
     .footer__tagline { font-size: 0.78rem; font-weight: 300; line-height: 1.8; opacity: 0.4; max-width: 260px; }
-    .footer__col-title { font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.3; font-weight: 500; margin-bottom: 1.0rem; display: block; }
+    .footer__col-title { font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.3; font-weight: 500; margin-bottom: 1.5rem; display: block; }
     .footer__links { display: flex; flex-direction: column; gap: 0.65rem; }
     .footer__link { font-size: 0.78rem; font-weight: 300; opacity: 0.5; transition: opacity 0.3s; }
     .footer__link:hover { opacity: 1; }
@@ -845,9 +885,65 @@
               </div>
 
               <div class="fg">
-                <label for="pregunta">¿Qué esperas encontrar en Numen?</label>
-                <textarea id="pregunta" name="pregunta" placeholder="Cuéntanos brevemente…" rows="3" required></textarea>
-                <span class="err-msg">Por favor, responde la pregunta</span>
+                <label for="edad">¿Cuántos años tienes?</label>
+                <div class="select-wrap">
+                  <select id="edad" name="edad" required>
+                    <option value="" disabled selected>Selecciona tu rango de edad</option>
+                    <option value="18-25">18 – 25 años</option>
+                    <option value="26-35">26 – 35 años</option>
+                    <option value="36-45">36 – 45 años</option>
+                    <option value="46-55">46 – 55 años</option>
+                    <option value="55+">Más de 55 años</option>
+                  </select>
+                </div>
+                <span class="err-msg">Por favor, selecciona tu edad</span>
+              </div>
+
+              <div class="fg" id="fg-tratamientos">
+                <label>¿Qué te interesa más? <span style="opacity:0.4">(puedes marcar varios)</span></label>
+                <div class="checks" id="checks-tratamientos">
+                  <label class="check-item">
+                    <input type="checkbox" name="interes[]" value="Medicina estética facial">
+                    <span class="check-box"></span>
+                    <span class="check-label">Medicina estética facial</span>
+                  </label>
+                  <label class="check-item">
+                    <input type="checkbox" name="interes[]" value="Rellenos y volumen">
+                    <span class="check-box"></span>
+                    <span class="check-label">Rellenos y volumen</span>
+                  </label>
+                  <label class="check-item">
+                    <input type="checkbox" name="interes[]" value="Eliminación de manchas y rejuvenecimiento">
+                    <span class="check-box"></span>
+                    <span class="check-label">Eliminación de manchas y rejuvenecimiento</span>
+                  </label>
+                  <label class="check-item">
+                    <input type="checkbox" name="interes[]" value="Pérdida de peso y nutrición">
+                    <span class="check-box"></span>
+                    <span class="check-label">Pérdida de peso y nutrición</span>
+                  </label>
+                  <label class="check-item">
+                    <input type="checkbox" name="interes[]" value="Bienestar y wellness">
+                    <span class="check-box"></span>
+                    <span class="check-label">Bienestar y wellness</span>
+                  </label>
+                  <label class="check-item">
+                    <input type="checkbox" name="interes[]" value="Well-aging y antiaging">
+                    <span class="check-box"></span>
+                    <span class="check-label">Well-aging y antiaging</span>
+                  </label>
+                  <label class="check-item">
+                    <input type="checkbox" name="interes[]" value="Todavía no lo sé">
+                    <span class="check-box"></span>
+                    <span class="check-label">Todavía no lo sé</span>
+                  </label>
+                </div>
+                <span class="err-msg">Marca al menos una opción</span>
+              </div>
+
+              <div class="fg">
+                <label for="expectativas">¿Qué te gustaría encontrar en Numen? <span style="opacity:0.4">(opcional)</span></label>
+                <textarea id="expectativas" name="expectativas" placeholder="Cuéntanos qué buscas, qué te preocupa o qué tratamiento te llama la atención…" rows="3"></textarea>
               </div>
 
               <div class="form-submit-wrap">
@@ -1084,8 +1180,10 @@
         e.preventDefault();
         let ok = true;
 
-        form.querySelectorAll('[required]').forEach(field => {
-          const err = field.parentElement.querySelector('.err-msg');
+        // Validar campos required normales (texto, email, select)
+        form.querySelectorAll('input[required], select[required], textarea[required]').forEach(field => {
+          const fg = field.closest('.fg');
+          const err = fg ? fg.querySelector('.err-msg') : null;
           field.classList.remove('err');
           if (err) err.classList.remove('show');
 
@@ -1099,6 +1197,16 @@
             ok = false;
           }
         });
+
+        // Validar checkboxes: al menos uno marcado
+        const checksGroup = document.getElementById('checks-tratamientos');
+        const checksErr = document.getElementById('fg-tratamientos').querySelector('.err-msg');
+        const anyChecked = checksGroup.querySelector('input[type="checkbox"]:checked');
+        checksErr.classList.remove('show');
+        if (!anyChecked) {
+          checksErr.classList.add('show');
+          ok = false;
+        }
 
         if (!ok) return;
 
